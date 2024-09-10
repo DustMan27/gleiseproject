@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>
+        Gliese Project
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html">
+            <h1>Gliese Project</h1>
+        </a>
+        <div class="right-group">
+            <button style="width: 250px; font-family: Binary;"><a href="{{ url_for('signup')}}">Sign Up</a></button>
+        </div>
+    </div>
+    <hr>
+    <div class="container-left">
+        <a href="{{ url_for('planet') }}">
+            <h2 class="header-spacing">Planet</h2>
+        </a>
+        <a href="{{ url_for('project')}}">
+            <h2 class="header-spacing">Project</h2>
+        </a>
+        <a href="{{ url_for('aboutus')}}">
+            <h2 class="header-spacing">About Us</h2>
+        </a>
+    </div>
+    <div class="paragraph-container">
+        <p>Are you ready to embark on the adventure of a lifetime? We're looking for pioneers, dreamers, and
+        explorers to join an extraordinary mission to Gliese 12 b—a distant exoplanet with the potential to
+        become humanity's new home. This is your chance to be part of something bigger than yourself, to
+        contribute to a groundbreaking project that will shape the future of human civilization!</p>
+    </div>
+    <div class="paragraph-container">
+        <p>Imagine a world with new horizons, endless possibilities, and the opportunity to build a better society from the
+        ground up. As a member of this historic voyage, you'll travel across the stars, experience the wonders of space,
+        and make history by helping to establish the first human colony outside of our solar system.</p>
+    </div>
+    <div class="paragraph-container">
+        <p>Sign up today to be a part of this incredible journey! Your adventure begins now. Dare to dream, explore, and
+        create a new world with us on Gliese 12 b! Visit our website to learn more and apply. The stars are
+        calling—answer the call!</p>
+    </div>
+</body>
+
+</html>

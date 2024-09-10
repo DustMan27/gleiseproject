@@ -1,0 +1,95 @@
+@font-face {
+    font-family: "Over There";
+    src: url("../fonts/Over There.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Binary";
+    src: url("../fonts/LTBinaryNeue.ttf") format("truetype");
+}
+
+html {
+    background-color: black;
+    background-image: url("../images/kosmos.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    margin-left: 100px;
+    margin-right: 100px;
+    overflow: hidden;
+}
+
+h1 {
+    font-family: 'Over There', sans-serif;
+    color: #cda033;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {}
+
+p,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Binary', sans-serif;
+    color: #cda033;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-left {
+    display: flex;
+    justify-content: left;
+}
+
+.right-group {
+    display: flex;
+    gap: 10px;
+}
+
+.header-spacing {
+    margin-right: 20px;
+}
+hr {
+    color: #cda033;
+    border-color: #cda033;
+}
+button {
+    background-color: black;
+    color: #cda033;
+    font-size: 25px;
+    border-radius: 50px;
+    border-color: #cda033;
+    border-style: groove;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    filter:brightness(50%);
+}
+
+.paragraph-container {
+    
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    flex-grow: 1;
+    font-size: large;
+}

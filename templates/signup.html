@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>
+        Gliese Project
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html">
+            <h1>Gliese Project</h1>
+        </a>
+        <div class="right-group">
+            <button style="width: 250px; font-family: Binary;"><a href="{{ url_for('signup')}}">Sign Up</a></button>
+        </div>
+    </div>
+    <hr>
+    <div class="container-left">
+        <a href="{{ url_for('planet') }}">
+            <h2 class="header-spacing">Planet</h2>
+        </a>
+        <a href="{{ url_for('project')}}">
+            <h2 class="header-spacing">Project</h2>
+        </a>
+        <a href="{{ url_for('aboutus')}}">
+            <h2 class="header-spacing">About Us</h2>
+        </a>
+    </div>
+    <form action="/signup" method="post">
+        <h2>Personal Details</h2>
+        <input type="text" name="firstName" id="first_name" placeholder="First Name" />
+        <input type="text" name="lastName" id="surname" placeholder="Last Name" /><br>
+        <input type="text" name="email" id="email" placeholder="Email" />
+        <input type="text" name="emailConfirm" id="email_confirmation" placeholder="Confirm Email" />
+        <p>Date of Birth: </p><input type="date" name="dateOfBirth" id="dob" placeholder="Date of Birth" />
+        <p>Country of Origin:</p>
+        <select id="country" name="country">
+            <option value="" disabled selected hidden>Select a Country</option>"
+            {% for country in countries %}
+                <option value="{{ country[0] }}">{{ country[0]}}</option>
+            {% endfor %}
+        </select>
+        <h2>Professional Information</h2>
+        <p>Industry:</p>
+        <select id="industry" name="industry">
+            <option value="" disabled selected hidden>Select an Industry</option>
+            {% for industry in industries %}
+                <option value="{{ industry[0] }}">{{ industry[0] }}</option>
+            {% endfor %}
+        </select>
+        <p>Job Title</p>
+        <input type="text" name="job_title" id="job_title" placeholder="Job Title">
+        <p>Salary (USD)</p>
+        <input type="number" name="salary" id="salary" placeholder="Salary">
+        <h2>Healthcare Information</h2>
+        <p>Insurer:</p>
+        <select id="insurer" name="insurer">
+            <option value="acecare">Acecare</option>
+            <option value="care4u">Care4u</option>
+            <option value="paraside">Paraside</option>
+            <option value="venuscare">Venus Care</option>
+        </select>
+        <p>Patient Reference No.</p>
+        <input type="text" name="patientReference" id="patient_ref" placeholder="Reference no." />
+        <p style="font-size: x-small;">By entering your information you agree to Gliese Project submitting your details
+            for request from your insurer.</p>
+        <button style="font-family: Binary; font-size: small; text-decoration: none;"
+                type="submit" method="post">Submit</button>
+
+    </form>
+
+
+
+
+</body>
+
+</html>

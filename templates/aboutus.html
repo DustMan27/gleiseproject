@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>
+        Gliese Project
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <a href="{{ url_for('index') }}">
+            <h1>Gliese Project</h1>
+        </a>
+        <div class="right-group">
+            <button style="width: 250px; font-family: Binary;"><a href="{{ url_for('signup')}}">Sign Up</a></button>
+        </div>
+    </div>
+    <hr>
+    <div class="container-left">
+        <a href="{{ url_for('planet') }}">
+            <h2 class="header-spacing">Planet</h2>. 
+        </a>
+        <a href="{{ url_for('project') }}">
+            <h2 class="header-spacing">Project</h2>
+        </a>
+        <a href="{{ url_for('aboutus') }}">
+            <h2 class="header-spacing">About Us</h2>
+        </a>
+    </div>
+    <div class="paragraph-container">
+        <p>Founded in 2050, TerraSpace is at the forefront of humanity's next great adventure: the colonization of
+            distant worlds. For over 50 years, we have dedicated ourselves to the mission of finding a new home for
+            humanity beyond Earth. As the challenges facing our planet grow, our goal is clear—to ensure the
+            survival and prosperity of the human race by expanding our horizons to the stars.</p>
+    </div>
+    <div class="paragraph-container">
+        <p>With a team of visionary scientists, engineers, and explorers, TerraSpace has spent decades developing
+            cutting-edge technology and sustainable strategies to make interstellar travel a reality. Our flagship
+            project is the journey to Gliese 12 b, an exoplanet with the potential to support human life. This ambitious
+            endeavor is more than just a space mission; it’s a beacon of hope for future generations.</p>
+    </div>
+    <div class="paragraph-container">
+        <p>At TerraSpace, we believe in the power of exploration, innovation, and resilience. We are driven by a single
+            purpose: to save humanity by providing a new frontier for human civilization. Join us as we embark on this
+            historic journey and make the stars our new home. Together, we can build a brighter future—one that reaches
+            beyond the limits of Earth.</p>
+    </div>
+</body>
+
+</html>

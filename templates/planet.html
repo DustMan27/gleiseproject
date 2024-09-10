@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>
+        Gliese Project
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/planet-style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html">
+            <h1>Gliese Project</h1>
+        </a>
+        <div class="right-group">
+            <button style="width: 250px; font-family: Binary;"><a href="{{ url_for('signup')}}">Sign Up</a></button>
+        </div>
+    </div>
+    <hr>
+    <div class="container-left">
+        <a href="{{ url_for('planet') }}">
+            <h2 class="header-spacing">Planet</h2>
+        </a>
+        <a href="{{ url_for('project')}}">
+            <h2 class="header-spacing">Project</h2>
+        </a>
+        <a href="{{ url_for('aboutus')}}">
+            <h2 class="header-spacing">About Us</h2>
+        </a>
+    </div>
+    <div class="paragraph-container">
+        <p><i>Gliese 12 b is a super Earth exoplanet that orbits a M-type star. Its mass is 3.87 Earths, it takes 12.8
+                days to complete one orbit of its star, and is 0.0668 AU from its star. Its discovery was announced in
+                2024.</i></p>
+    </div>
+    <div class="paragraph-container">
+        <p>Along with the planets of TRAPPIST-1, Gliese 12 b is one of the nearest known relatively temperate transiting
+            exoplanets. Gliese 12 b orbits slightly closer than the inner edge of its star's habitable
+            zone, with an insolation between those of Earth and Venus. Its equilibrium temperature, assuming zero
+            albedo, is 315 K (42 °C; 107 °F).</p>
+    </div>
+    <img src="{{ url_for('static', filename='images/Spinning_Mars.gif') }}" alt="Spinning Planet">
+</body>
+
+</html>
