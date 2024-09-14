@@ -16,7 +16,7 @@ def signup():
         # connect to the database + create object 'conn'
         conn = sqlite3.connect('data/gleiseproject.db')
 
-        # create a cursor for navigating db
+        # create a cursor object for navigating db
         cur = conn.cursor()
 
         # select our table that we want
@@ -81,6 +81,10 @@ def planet():
 @app.route("/project")
 def project():
     return render_template("project.html")
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
