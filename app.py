@@ -1,5 +1,14 @@
 from flask import Flask, render_template, request
 import sqlite3
+import bcrypt
+
+def hash_password(plain_password):
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(plain_password.encode('utf-8'), salt)
+    return hashed_password
+
+def verify_password(plain_password, hashed_password):
+    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password)
 
 app = Flask(__name__)
 
@@ -46,8 +55,6 @@ def signup():
         industry = request.form['industry']
         job_title = request.form['job_title']
         salary = request.form['salary']
-        insurer = request.form['insurer']
-        reference_number = request.form['patientReference']
 
         # connect to database
         conn = sqlite3.connect('data/gleiseproject.db')
@@ -62,8 +69,6 @@ def signup():
         cur.execute('INSERT INTO signee_country (signee_id, country) VALUES (?, ?)', (signee_id, country))
         # signee professional information
         cur.execute('INSERT INTO signee_professional_information (signee_id, industry, job_title, salary) VALUES (?, ?, ?, ?)', (signee_id, industry, job_title, salary))
-        # signee healthcare
-        cur.execute('INSERT INTO signee_healthcare_information (signee_id, provider, reference_number) VALUES (?, ?, ?)', (signee_id, insurer, reference_number))
         # close the connection
         conn.commit()
         conn.close()
@@ -82,9 +87,30 @@ def planet():
 def project():
     return render_template("project.html")
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
-    return render_template("login.html")
+    if request.method == 'GET':
+        return render_template("login.html")
+    elif request.method == 'POST':
+        #
+        username = request.form['username']
+        password = hash_password(request.form['password'])
+        #
+        conn = sqlite3.connect('data/gleiseproject.db')
+        cur  = conn.cursor()
+        #
+        cur.execute('SELECT username FROM users WHERE username = ?', (username,))
+        username_validation = str(cur.fetchone()[0])
+        cur.execute('SELECT password FROM users WHERE username = ?', (username,))
+        password_validation = str(cur.fetchone()[0])
+        #
+        if password == password_validation:
+            render_template('user_index.html')
+
+@app.route("/user_index")
+def user_index():
+    return render_template('user_index.html')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
