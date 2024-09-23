@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User Index</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Admin Page</h1>
+    </div>
+    <table>
+        <tr>
+            <th>
+                <a href="{{ url_for('admin') }}">Admin</a>
+            </th>
+            <th>
+                <a href="{{ url_for('config') }}">Config</a>
+            </th>
+            <th>
+                <a href="{{ url_for('signee') }}">Signees</a>
+            </th>
+        </tr>
+    </table>
+
+</body>
+
+</html>

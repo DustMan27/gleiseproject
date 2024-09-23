@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Configuration</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Configuration</h1>
+    </div>
+    <div>
+        <form action="/config" method="post">
+            <h2>Add User</h2>
+            <input type="text" id="username" name="username">
+            <input type="password" id="password" name="password">
+            <button type="submit" method="post" style="font-size: 10px;">Create User</button>
+        </form>
+    </div>
+    <br>
+    <table>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                User
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+        {% for row in users %}
+        <tr>
+            <td>
+                {{ row[0] }}
+            </td>
+            <td>
+                {{ row[1] }}
+            </td>
+            <td>
+                <form id="deleteuser" action="/delete_user" method="post">
+                    <input type="hidden" name="user_id" value="{{ row[0] }}">
+                    <input type="submit" value="Delete">
+                </form>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+</body>
+
+</html>

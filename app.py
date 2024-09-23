@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect, url_for
+from werkzeug.security import check_password_hash
 import sqlite3
 import bcrypt
+from flask_session import Session 
 
 def hash_password(plain_password):
     salt = bcrypt.gensalt()
@@ -8,9 +10,12 @@ def hash_password(plain_password):
     return hashed_password
 
 def verify_password(plain_password, hashed_password):
+    if isinstance(hashed_password, str):
+        hashed_password = hashed_password.encode('utf-8')
     return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password)
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'
 
 @app.route("/")
 def index():
@@ -90,27 +95,74 @@ def project():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
+        session.clear()
         return render_template("login.html")
     elif request.method == 'POST':
         #
         username = request.form['username']
-        password = hash_password(request.form['password'])
+        password = request.form['password']
         #
         conn = sqlite3.connect('data/gleiseproject.db')
         cur  = conn.cursor()
         #
         cur.execute('SELECT username FROM users WHERE username = ?', (username,))
-        username_validation = str(cur.fetchone()[0])
+        username_validation = (cur.fetchone()[0])
         cur.execute('SELECT password FROM users WHERE username = ?', (username,))
-        password_validation = str(cur.fetchone()[0])
+        hashed_password = (cur.fetchone()[0])
         #
-        if password == password_validation:
-            render_template('user_index.html')
+        if verify_password(password, hashed_password):
+            cur.execute('SELECT id FROM users WHERE username = ?', (username,))
+            session['logged_in'] = True
+            session['username'] = username
+            return redirect(url_for('admin'))
 
-@app.route("/user_index")
-def user_index():
-    return render_template('user_index.html')
+@app.route("/admin", methods=['GET', 'POST'])
+def admin():
+    if request.method == 'GET':
+        if not session.get('logged_in'):
+            session.clear()
+            return render_template('login.html')
+        return render_template('admin.html', username=session.get('username'))
+    
+@app.route("/config", methods=['GET', 'POST'])
+def config():
+    if request.method == 'GET':
+        conn = sqlite3.connect('data/gleiseproject.db')
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM users")
+        users = cur.fetchall()
+        return render_template('config.html', users=users)
+    elif request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        hashed_password = hash_password(password)
+        conn = sqlite3.connect('data/gleiseproject.db')
+        cur = conn.cursor()
+        cur.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password,))
+        cur.execute('SELECT * FROM users')
+        users = cur.fetchall()
+        conn.commit()
+        conn.close()
+        return render_template('config.html', users=users)
+    
+@app.route('/delete_user', methods=['POST'])
+def deleteuser():
+    conn = sqlite3.connect('data/gleiseproject.db')
+    cur = conn.cursor()
+    user_id = request.form.get('user_id')
+    cur.execute('DELETE FROM users WHERE id = ?', (user_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('config'))
 
+
+@app.route('/signee', methods=['GET', 'POST'])
+def signee():
+    conn = sqlite3.connect('data/gleiseproject.db')
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM successful_signee_view')
+    successful_signees = cur.fetchall()
+    return render_template('signee.html', successful_signees=successful_signees)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

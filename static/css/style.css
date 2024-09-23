@@ -24,6 +24,17 @@ h1 {
     color: #cda033;
 }
 
+tr, th, td, table {
+    color: #cda033;
+    border-width: 1px;
+    border-color: #cda033;
+    font-family: Binary;
+    border-style: solid;
+}
+tr, th, td {
+    padding: 5px;
+}
+
 h1,
 h2,
 h3,

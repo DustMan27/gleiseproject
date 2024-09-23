@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Signees</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
+        <h1>Users</h1>
+        <table>
+            <tr>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Surname
+                </th>
+                <th>
+                    Country
+                </th>
+                <th>
+                    DOB
+                </th>
+                <th>
+                    Industry
+                </th>
+                <th>
+                    Job Title
+                </th>
+            </tr>
+        
+        {% for signee in successful_signees %}
+
+            <tr>
+                <td>
+                    {{ signee[0] }}
+                </td>
+                <td>
+                    {{ signee[1] }}
+                </td>
+                <td>
+                    {{ signee[2] }}
+                </td>
+                <td>
+                    {{ signee[3] }}
+                </td>
+                <td>
+                    {{ signee[4] }}}
+                </td>
+                <td>
+                    {{ signee[5] }}
+                </td>
+            </tr>
+
+        {% endfor %}
+
+        </table>
+    </body>
+</html>
